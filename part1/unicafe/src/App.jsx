@@ -17,12 +17,15 @@ const Row = ({text, value}) => <div>{text} {value}</div>
 
 const Statistics = (props) => {
   const {good, neutral, bad, all} = props
+
+  const getTotal = () => good + neutral + bad
+
   return <div>
     <h2>statistics</h2>
     <Row text='good' value={good} />
     <Row text='neutral' value={neutral} />
     <Row text='bad' value={bad} />
-    <Row text='all' value={good + neutral + bad} />
+    <Row text='all' value={getTotal()} />
   </div>
 }
 
