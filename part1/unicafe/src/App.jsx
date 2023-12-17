@@ -16,7 +16,7 @@ const Feedback = ({handleGood, handleNeutral, handleBad}) => {
 const Row = ({text, value}) => <div>{text} {value}</div>
 
 const Statistics = (props) => {
-  const {good, neutral, bad, all} = props
+  const {good, neutral, bad} = props
 
   const getTotal = () => good + neutral + bad
 
