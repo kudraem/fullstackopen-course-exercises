@@ -5,12 +5,14 @@ const Button = ({text, handleClick}) => {
 }
 
 const Feedback = ({handleGood, handleNeutral, handleBad}) => {
-  return <div>
-    <h2>give feedback</h2>
-    <Button text='good' handleClick={handleGood} />
-    <Button text='neutral' handleClick={handleNeutral} />
-    <Button text='bad' handleClick={handleBad} />
-  </div>
+  return (
+    <div>
+      <h2>give feedback</h2>
+      <Button text='good' handleClick={handleGood} />
+      <Button text='neutral' handleClick={handleNeutral} />
+      <Button text='bad' handleClick={handleBad} />
+    </div>
+  )
 }
 
 const Row = ({text, value}) => <div>{text} {value}</div>
@@ -45,15 +47,15 @@ const Statistics = (props) => {
 
   if (total > 0) {
     return (
-    <div>
-      <h2>statistics</h2>
-      <Row text='good' value={good} />
-      <Row text='neutral' value={neutral} />
-      <Row text='bad' value={bad} />
-      <Row text='all' value={total} />
-      <Row text='average' value={getAverage()} />
-      <Row text='positive' value={getPositivePercentage() + ' %'} />
-    </div>
+      <div>
+        <h2>statistics</h2>
+        <Row text='good' value={good} />
+        <Row text='neutral' value={neutral} />
+        <Row text='bad' value={bad} />
+        <Row text='all' value={total} />
+        <Row text='average' value={getAverage()} />
+        <Row text='positive' value={getPositivePercentage() + ' %'} />
+      </div>
     )
   }
   
