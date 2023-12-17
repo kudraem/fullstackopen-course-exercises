@@ -15,12 +15,14 @@ const Feedback = ({handleGood, handleNeutral, handleBad}) => {
 
 const Row = ({text, value}) => <div>{text} {value}</div>
 
-const Statistics = ({good, neutral, bad}) => {
+const Statistics = (props) => {
+  const {good, neutral, bad, all} = props
   return <div>
     <h2>statistics</h2>
     <Row text='good' value={good} />
     <Row text='neutral' value={neutral} />
     <Row text='bad' value={bad} />
+    <Row text='all' value={good + neutral + bad} />
   </div>
 }
 
@@ -35,7 +37,10 @@ const App = () => {
                 handleNeutral={() => setNeutral(neutral + 1)}
                 handleBad={() => setBad(bad + 1)} 
       />
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <Statistics good={good} 
+                  neutral={neutral} 
+                  bad={bad} 
+      />
     </div>
   )
 }
