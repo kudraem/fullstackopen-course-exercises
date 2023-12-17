@@ -18,7 +18,7 @@ const Row = ({text, value}) => <div>{text} {value}</div>
 const Statistics = (props) => {
   const {good, neutral, bad} = props
 
-  const getTotal = () => good + neutral + bad
+  const total = good + neutral + bad
 
   const getAverage = () => {
     const GOOD_FACTOR = 1
@@ -26,7 +26,6 @@ const Statistics = (props) => {
 
     let average = 0
 
-    const total = getTotal()
     if (total > 0) {
       average = (good * GOOD_FACTOR + bad * BAD_FACTOR) / total
     }
@@ -38,7 +37,7 @@ const Statistics = (props) => {
     let positive = 0
 
     if (good > 0) {
-      positive = good / getTotal() * 100
+      positive = good / total * 100
     }
     
     return positive
@@ -49,7 +48,7 @@ const Statistics = (props) => {
     <Row text='good' value={good} />
     <Row text='neutral' value={neutral} />
     <Row text='bad' value={bad} />
-    <Row text='all' value={getTotal()} />
+    <Row text='all' value={total} />
     <Row text='average' value={getAverage()} />
     <Row text='positive' value={getPositivePercentage() + ' %'} />
   </div>
