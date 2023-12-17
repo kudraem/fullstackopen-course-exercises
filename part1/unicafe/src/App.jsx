@@ -34,6 +34,16 @@ const Statistics = (props) => {
     return average
   }
 
+  const getPositivePercentage = () => {
+    let positive = 0
+
+    if (good > 0) {
+      positive = good / getTotal() * 100
+    }
+    
+    return positive
+  }
+
   return <div>
     <h2>statistics</h2>
     <Row text='good' value={good} />
@@ -41,6 +51,7 @@ const Statistics = (props) => {
     <Row text='bad' value={bad} />
     <Row text='all' value={getTotal()} />
     <Row text='average' value={getAverage()} />
+    <Row text='positive' value={getPositivePercentage() + ' %'} />
   </div>
 }
 
