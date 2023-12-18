@@ -15,7 +15,14 @@ const Feedback = ({handleGood, handleNeutral, handleBad}) => {
   )
 }
 
-const StatisticLine = ({text, value}) => <div>{text} {value}</div>
+const StatisticRow = ({text, value}) => {
+  return (
+    <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
 
 const Statistics = (props) => {
   const {good, neutral, bad} = props
@@ -49,12 +56,16 @@ const Statistics = (props) => {
     return (
       <div>
         <h2>statistics</h2>
-        <StatisticLine text='good' value={good} />
-        <StatisticLine text='neutral' value={neutral} />
-        <StatisticLine text='bad' value={bad} />
-        <StatisticLine text='all' value={total} />
-        <StatisticLine text='average' value={getAverage()} />
-        <StatisticLine text='positive' value={getPositivePercentage() + ' %'} />
+        <table>
+          <tbody>
+            <StatisticRow text='good' value={good} />
+            <StatisticRow text='neutral' value={neutral} />
+            <StatisticRow text='bad' value={bad} />
+            <StatisticRow text='all' value={total} />
+            <StatisticRow text='average' value={getAverage()} />
+            <StatisticRow text='positive' value={getPositivePercentage() + ' %'} />
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -62,7 +73,7 @@ const Statistics = (props) => {
   return (
     <div>
       <h2>statistics</h2>
-      <StatisticLine text='No feedback given' />
+      <p>No feedback given</p>
     </div>
   )
 }
