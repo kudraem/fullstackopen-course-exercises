@@ -15,10 +15,11 @@ const App = () => {
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
-    'The only walsy to go fast, is to go well.'
+    'The only walsy to go fast, is to go well.',
   ]
-   
+  
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
   const handleNextAnecdote = () => {
     const maxIndex = anecdotes.length - 1
@@ -29,9 +30,17 @@ const App = () => {
     setSelected(randomIndex)
   }
 
+  const handleVote = () => {
+    const updatedVotes = [...votes]
+    updatedVotes[selected]++
+    setVotes(updatedVotes)
+  }
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <Button text='vote' handleClick={handleVote} />
       <Button text='next anecdote' handleClick={handleNextAnecdote} />
     </div>
   )
