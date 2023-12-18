@@ -1,8 +1,52 @@
 import { useState } from 'react'
 
+const AnecdoteOfTheDay = (props) => {
+  const {text, votes, handleVote, handleNextAnecdote} = props
+  return (
+    <div>
+      <h2>Anecdote of the day</h2>
+      <Anecdote text={text}/>
+      <AnecdoteVotes votesCount={votes} />
+      <Button text='vote' handleClick={handleVote} />
+      <Button text='next anecdote' handleClick={handleNextAnecdote} />
+    </div>
+  )
+}
+
+const Anecdote = ({text}) => <p>{text}</p>
+
+const AnecdoteVotes = ({votesCount}) => {
+  return <p>has {votesCount} votes</p>
+}
+
 const Button = ({text, handleClick}) => {
   return (
     <button onClick={handleClick}>{text}</button>
+  )
+}
+
+const MostPopularAnecdote = ({anecdotes, votes}) => {
+  const getMostPopularAnecdote = () => {
+    const maxVotes = Math.max(...votes)
+    const indexOfMax = votes.indexOf(maxVotes)
+    return anecdotes[indexOfMax]
+  }
+
+  const totalVotes = votes.reduce((accum, cur) => accum + cur, 0)
+  if (totalVotes === 0) {
+    return (
+      <div>
+        <h2>Anecdote with most votes</h2>
+        <p>It's seems like nobody didn't vote</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <h2>Anecdote with most votes</h2>
+      <Anecdote text={getMostPopularAnecdote()}/>
+    </div>
   )
 }
 
@@ -17,7 +61,7 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only walsy to go fast, is to go well.',
   ]
-  
+
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0))
 
@@ -37,12 +81,13 @@ const App = () => {
   }
 
   return (
-    <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected]} votes</p>
-      <Button text='vote' handleClick={handleVote} />
-      <Button text='next anecdote' handleClick={handleNextAnecdote} />
-    </div>
+    <>
+      <AnecdoteOfTheDay text={anecdotes[selected]} 
+                        votes={votes[selected]} 
+                        handleNextAnecdote={handleNextAnecdote}
+                        handleVote={handleVote}/>
+      <MostPopularAnecdote anecdotes={anecdotes} votes={votes} />
+    </>
   )
 }
 
