@@ -21,6 +21,7 @@ const Content = ({parts}) => {
       {parts.map(part => 
         <Part key={part.id} name={part.name} exercises={part.exercises} />
       )}
+      <Total parts={parts} />
     </>
   )
 }
@@ -30,6 +31,15 @@ const Part = ({name, exercises}) => {
     <p>
       {name} {exercises}
     </p>
+  )
+}
+
+const Total = ({parts}) => {
+  const totalExercises = parts.reduce((total, part) => 
+    total + part.exercises, 0)
+
+  return (
+    <p>total of {totalExercises} exercises</p>
   )
 }
 
@@ -47,7 +57,12 @@ const App = () => {
         name: 'Using props to pass data',
         exercises: 7,
         id: 2
-      }
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      },
     ]
   }
 
