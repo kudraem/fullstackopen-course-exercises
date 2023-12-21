@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Person = ({person}) => <span>{person.name}</span>
+const Person = ({person}) => <div>{person.name}</div>
 
 const App = () => {
   const [persons, setPersons] = useState([
