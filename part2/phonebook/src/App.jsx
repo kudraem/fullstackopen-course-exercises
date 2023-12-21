@@ -10,14 +10,27 @@ const App = () => {
 
   const handleAddPersonFormSubmit = (e) => {
     e.preventDefault();
+    const sanitizedNewName = newName.trim()
 
-    if (newName.length > 0) {
-      const newPerson = {
-        name: newName
-      }
-      setPersons(persons.concat(newPerson))
-      setNewName('')
+    if (sanitizedNewName.length < 0) {
+      return;
     }
+
+    const personDuplicateIndex = persons.findIndex(curPerson => {
+      return curPerson.name === sanitizedNewName
+    })
+    
+    if (personDuplicateIndex !== -1) {
+      alert(`${sanitizedNewName} is already added to phonebook`)
+      return;
+    }
+
+    const newPerson = {
+      name: sanitizedNewName
+    }
+    
+    setPersons(persons.concat(newPerson))
+    setNewName('')
   }
 
   return (
