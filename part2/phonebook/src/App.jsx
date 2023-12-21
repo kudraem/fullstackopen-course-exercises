@@ -1,18 +1,23 @@
 import { useState } from 'react'
 
-const Person = ({person}) => <div>{person.name}</div>
+const Person = ({person}) => <div>{person.name} {person.phone}</div>
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
-  ]) 
+    { 
+      name: 'Arto Hellas',
+      phone: '040-1234567'
+    }
+  ])
   const [newName, setNewName] = useState('')
+  const [newPhone, setNewPhone] = useState('')
 
   const handleAddPersonFormSubmit = (e) => {
     e.preventDefault();
     const sanitizedNewName = newName.trim()
+    const sanitizedNewPhone = newPhone.trim()
 
-    if (sanitizedNewName.length <= 0) {
+    if (sanitizedNewName.length <= 0 || sanitizedNewPhone.length <= 0) {
       return;
     }
 
@@ -26,11 +31,13 @@ const App = () => {
     }
 
     const newPerson = {
-      name: sanitizedNewName
+      name: sanitizedNewName,
+      phone: sanitizedNewPhone
     }
-    
+
     setPersons(persons.concat(newPerson))
     setNewName('')
+    setNewPhone('')
   }
 
   return (
@@ -42,6 +49,12 @@ const App = () => {
                   value={newName} 
                   onChange={(e) => setNewName(e.target.value)}
                 />
+        </div>
+        <div>
+          number: <input
+                    value={newPhone}
+                    onChange={(e) => setNewPhone(e.target.value)}
+                  />
         </div>
         <div>
           <button type="submit">add</button>
