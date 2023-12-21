@@ -1,5 +1,16 @@
 import { useState } from 'react'
 
+const Filter = ({value, handleChange}) => {
+  return (
+    <>
+      filter shown with <input 
+                        value={value}
+                        onChange={handleChange}
+                      /> 
+    </>
+  )
+}
+
 const Person = ({person}) => <div>{person.name} {person.phone}</div>
 
 const Persons = ({persons}) => {
@@ -58,10 +69,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      filter shown with <input 
-                          value={filter}
-                          onChange={(e) => setNewFilter(e.target.value)}
-                        />
+      <Filter value={filter} handleChange={(e) => setNewFilter(e.target.value)} />
+      
       <h2>add a new</h2>
       <form onSubmit={handleAddPersonFormSubmit}>
         <div>
@@ -80,6 +89,7 @@ const App = () => {
           <button type="submit">add</button>
         </div>
       </form>
+      
       <h2>Numbers</h2>
       <Persons persons={personsToShow} />
     </div>
