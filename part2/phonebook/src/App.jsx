@@ -12,7 +12,7 @@ const App = () => {
     e.preventDefault();
     const sanitizedNewName = newName.trim()
 
-    if (sanitizedNewName.length < 0) {
+    if (sanitizedNewName.length <= 0) {
       return;
     }
 
